@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling>=1.6.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "urllib3-lts-py38"
+version = "2025.50181"
+description = "LTS Security release for urllib3 (CVE-2025-50181 Patch) for Python 3.8"
+readme = "README.md"
+requires-python = ">=3.8, <3.9"
+license = "MIT"
+authors = [{name = "OmniPKG", email = "security@omnipkg.dev"}]
+classifiers = [
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/1minds3t/urllib3-lts"
