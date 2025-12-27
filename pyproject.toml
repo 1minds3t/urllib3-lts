@@ -4,14 +4,18 @@ build-backend = "hatchling.build"
 
 [project]
 name = "urllib3-lts"
-version = "2024.37891"
+version = "2025.50181"
 description = "LTS Security Dispatcher for urllib3"
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"
 dependencies = [
-    "urllib3-lts-py37==2024.37891 ; python_version >= '3.7' and python_version < '3.8'",
-    "urllib3>=2.2.2 ; python_version >= '3.8'" 
+    # Py3.7 gets the version with BOTH fixes
+    "urllib3-lts-py37==2025.50181 ; python_version >= '3.7' and python_version < '3.8'",
+    # Py3.8 gets the version with THIS fix (Proxy-Auth was already safe in base)
+    "urllib3-lts-py38==2025.50181 ; python_version >= '3.8' and python_version < '3.9'",
+    # Modern Pythons get upstream
+    "urllib3>=2.3.0 ; python_version >= '3.9'" 
 ]
 
 [project.urls]
