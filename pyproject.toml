@@ -4,21 +4,25 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "urllib3-lts"
-version = "2025.66471"
-description = "LTS Security Ecosystem for urllib3"
-readme = "README.md"
+version = "2025.66471.1"
+description = "LTS Security release for urllib3 (CVE-2025-66471 Patch) - Meta-package"
 requires-python = ">=3.7"
 license = {text = "MIT"}
+readme = "README.md"
 authors = [{name = "1minds3t", email = "1minds3t@proton.me"}]
-classifiers = ["Topic :: Security"]
+classifiers = [
+    "Topic :: Security",
+    "Intended Audience :: Developers"
+]
 dependencies = [
-    "urllib3-lts-py37==2025.66471 ; python_version >= '3.7' and python_version < '3.8'",
-    "urllib3-lts-py38==2025.66471 ; python_version >= '3.8' and python_version < '3.9'",
+    "urllib3-lts-py37==2025.66471.1 ; python_version >= '3.7' and python_version < '3.8'",
+    "urllib3-lts-py38==2025.66471.1 ; python_version >= '3.8' and python_version < '3.9'",
     "urllib3>=2.3.0 ; python_version >= '3.9'" 
 ]
 
 [project.urls]
 Homepage = "https://github.com/1minds3t/urllib3-lts"
+"Security" = "https://github.com/1minds3t/urllib3-lts/blob/main/SECURITY.md"
 
 [tool.setuptools]
 packages = []
