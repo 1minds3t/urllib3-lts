@@ -4,21 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "urllib3-lts-py38"
-version = "2025.66471"
-description = "LTS Security Backport for Python 3.8. Fixes CVE-2025-66471, CVE-2025-66418, CVE-2025-50182, CVE-2025-50181."
-readme = "README.md"
+version = "2025.66471.1"
+description = "Python 3.8 urllib3 with CVE-2025-66471 security patches"
 requires-python = ">=3.8, <3.9"
 license = {text = "MIT"}
+readme = "README.md"
 authors = [{name = "1minds3t", email = "1minds3t@proton.me"}]
 classifiers = [
     "Programming Language :: Python :: 3.8",
-    "Topic :: Security"
+    "Topic :: Security",
+    "Intended Audience :: Developers"
 ]
-dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/1minds3t/urllib3-lts"
+"Source" = "https://github.com/1minds3t/urllib3-lts/tree/py38"
 
-# Explicitly tell setuptools where to find the code
 [tool.setuptools.packages.find]
 where = ["src"]
