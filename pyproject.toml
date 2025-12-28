@@ -5,15 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "urllib3-lts"
 version = "2025.66471"
-description = "LTS Security Ecosystem for urllib3 (Fixes DoS, Redirects, Leaks)"
+description = "LTS Security Ecosystem for urllib3"
 readme = "README.md"
 requires-python = ">=3.7"
 license = {text = "MIT"}
 authors = [{name = "1minds3t", email = "1minds3t@proton.me"}]
-classifiers = [
-    "Topic :: Security",
-    "Intended Audience :: Developers"
-]
+classifiers = ["Topic :: Security"]
 dependencies = [
     "urllib3-lts-py37==2025.66471 ; python_version >= '3.7' and python_version < '3.8'",
     "urllib3-lts-py38==2025.66471 ; python_version >= '3.8' and python_version < '3.9'",
@@ -23,7 +20,5 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/1minds3t/urllib3-lts"
 
-# 🚨 CRITICAL FIX: Explicitly tell setuptools this is a meta-package (no code)
-# This prevents it from trying to package 'after/' and 'before/' folders.
 [tool.setuptools]
 packages = []

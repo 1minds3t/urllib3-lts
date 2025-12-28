@@ -4,6 +4,15 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      python_version:
+        description: 'Target to build'
+        required: true
+        type: choice
+        options:
+          - 'dispatcher'
+          - 'py37'
+          - 'py38'
 
 permissions:
   id-token: write
@@ -14,9 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     environment: pypi
     steps:
-      - name: Checkout Code
+      - name: Determine Python version and branch
+        id: python_info
+        run: |
+          BRANCH="main"
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            INPUT="${{ github.event.inputs.python_version }}"
+            if [ "$INPUT" == "dispatcher" ]; then BRANCH="main"; else BRANCH="$INPUT"; fi
+          else
+            TAG_NAME="${{ github.event.release.tag_name }}"
+            if [[ "$TAG_NAME" =~ -py37$ ]]; then BRANCH="py37";
+            elif [[ "$TAG_NAME" =~ -py38$ ]]; then BRANCH="py38";
+            else BRANCH="main"; fi
+          fi
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Checkout correct branch
         uses: actions/checkout@v4
         with:
+          ref: ${{ steps.python_info.outputs.branch }}
           fetch-depth: 0
 
       - name: Set up Python
@@ -24,47 +49,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Builder
-        run: pip install build
+      - name: Install build tools
+        run: pip install --upgrade pip build setuptools wheel
 
-      - name: Build Main (Dispatcher)
+      - name: Build package
         run: |
-          git checkout main
           python -m build
-          mv dist dist-main
-
-      - name: Build Py3.7
-        run: |
-          git checkout py37
-          python -m build
-          mkdir -p dist-py37
-          mv dist/* dist-py37/ 2>/dev/null || mv dist-main/* dist-py37/ 
-
-      - name: Build Py3.8
-        run: |
-          git checkout py38
-          python -m build
-          mkdir -p dist-py38
-          mv dist/* dist-py38/ 2>/dev/null
-
-      - name: Prepare Artifacts
-        run: |
-          mkdir -p final_dist
-          cp dist-main/* final_dist/ 2>/dev/null || true
-          cp dist-py37/* final_dist/ 2>/dev/null || true
-          cp dist-py38/* final_dist/ 2>/dev/null || true
-          
-          # Sanitize filenames
-          cd final_dist
-          for f in *; do
-            new_name=$(echo "$f" | sed -e 's/-/_/g' -e 's/_tar.gz/.tar.gz/' -e 's/_whl/.whl/')
-            if [ "$f" != "$new_name" ]; then
-              mv "$f" "$new_name"
-            fi
-          done
+          echo "📦 Artifacts created:"
+          ls -lh dist/
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages_dir: final_dist
           skip-existing: true
