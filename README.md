@@ -35,3 +35,20 @@ omnipkg reset -y
 
 ### 🚧 Coming Soon: omnipkg-runtime
 We are building a runtime enforcer that allows configurable **WARN** or **BLOCK** policies for unpatched vulnerabilities. Stay tuned.
+
+## ⚠️ Important: Installation for Python 3.7-3.8
+
+**Before installing urllib3-lts, uninstall any existing urllib3:**
+
+```bash
+pip uninstall urllib3 -y
+pip install urllib3-lts
+```
+
+This ensures you get the security patches. If you install urllib3-lts without removing urllib3 first, other packages may reinstall the vulnerable version.
+
+### Alternative: Pin in requirements.txt
+```txt
+urllib3-lts-py37==2025.66471.3 ; python_version<'3.8'
+urllib3-lts-py38==2025.66471.2 ; python_version>='3.8' and python_version<'3.9'
+```
