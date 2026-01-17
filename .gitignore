@@ -1,11 +1,48 @@
-.*
-!/.github/
-*.py[co]
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 *.egg
-*.egg-info
+*.egg-info/
+dist/
+build/
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
 *.log
-/dist
-/build
-/docs/_build
-coverage.xml
-src/urllib3/_version.py
+logs/
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Project specific
+.cache/
+test_*.py
