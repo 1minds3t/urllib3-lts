@@ -46,3 +46,16 @@ htmlcov/
 # Project specific
 .cache/
 fix_*.sh
+before/
+after/
+patched/
+*.orig
+apply_cve_*.py
+fix_*.py
+patch_*.py
+sync_*.sh
+clean_source.diff
+build/
+dist/
+*.egg-info/
+__pycache__/
