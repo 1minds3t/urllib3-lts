@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2026.21441.1] — 2026-02-22
+
+Documentation Consolidation and Repository Cleanup
+
+This maintenance release focuses on repository health and documentation clarity for the Python 3.7 LTS branch. No functional code changes were made since `v2026.21441`.
+
+* **Centralized Security Hub:** Consolidated all vulnerability analysis and backport tracking from root-level files into a single, comprehensive `security/README.md`. This provides auditors and users with a unified "source of truth" for the 5 CVEs currently addressed in this branch.
+* **Metadata Alignment:** Updated the primary project `README.md` to correctly reflect the current patch level (`2026.21441`) and the total count of critical/high vulnerabilities fixed.
+
+* **Legacy File Removal:** Deleted obsolete root-level patch files (`.patch`, `.diff`) and analysis logs that are now properly archived within the `security/` directory structure.
+* **Build Artifact Cleanup:** Removed non-essential build-generated files (like `PKG-INFO`) from the source tree to ensure clean editable installs and minimize repository bloat.
+
+**Note to users:** This release ensures that all security-related information is easily discoverable and consistently documented across the `urllib3-lts-py37` ecosystem.
+
+---
+
+**📚 Documentation:**
+- README.md (9 lines)
+- security/README.md (83 lines)
+
+_7 files changed, 89 insertions(+), 4249 deletions(-)_
+
 ## [2026.21441] — 2026-02-22
 
 Comprehensive Security Backports (CVE-2024-37891 to CVE-2026-21441)
