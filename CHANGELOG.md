@@ -13,7 +13,6 @@ This critical release delivers cumulative security backports for the Python 3.7 
 
 All patches have been meticulously adapted to maintain runtime compatibility with Python 3.7, stripping out structural refactors (like Python 3.14 imports or walrus operators) while preserving the core security logic.
 
-
 * **[CVE-2026-21441] Decompression-Bomb Bypass & Retry-After DoS**
   * Patched `drain_conn()` to respect the caller's decoding state, preventing decompression bombs from exhausting resources when following HTTP redirects via the streaming API.
   * Implemented a strict 6-hour (`21600` second) maximum cap on `Retry-After` headers to prevent malicious servers from causing indefinite sleep DoS attacks.
@@ -26,7 +25,6 @@ All patches have been meticulously adapted to maintain runtime compatibility wit
   * Fixed an issue where instantiating a `PoolManager` with `retries=False` or `retries=0` failed to properly disable redirects, leaving applications vulnerable to SSRF.
 * **[CVE-2024-37891] Proxy-Authorization Header Leak**
   * Added `Proxy-Authorization` to the default list of headers that are automatically stripped during cross-origin redirects.
-
 
 * **Build Support:** Added a minimal `setup.py` shim to fully support `pip install -e .` on legacy `pip` and `setuptools` versions prevalent in Python 3.7 environments that lack complete PEP 660 (`pyproject.toml`) support.
 * **Security Test Suite:** Backported and stabilized 110 dedicated security tests specifically targeted at verifying these CVEs. All tests now pass cleanly under CPython 3.7.9.
@@ -55,5 +53,4 @@ All patches have been meticulously adapted to maintain runtime compatibility wit
 - docs: add vulnerability analysis and patch documentation for CVE-2026-21441
 - fix: patch CVE-2026-21441 decompression-bomb bypass
 
-_40 files changed, 14564 insertions(+), 5 deletions(-)_
-
+_41 files changed, 14623 insertions(+), 5 deletions(-)_
