@@ -27,7 +27,7 @@ jobs:
         id: python_info
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            # If triggered manually, just use the dropdown choice directly!
+            # If triggered manually, use the dropdown choice directly
             BRANCH="${{ github.event.inputs.python_version }}"
           else
             # If triggered by a GitHub Release, parse the tag name
@@ -37,7 +37,6 @@ jobs:
             elif [[ "$TAG_NAME" =~ -py38$ ]]; then 
               BRANCH="lts-py38"
             else 
-              # Default fallback is now the new dispatcher branch
               BRANCH="lts-dispatcher"
             fi
           fi
@@ -63,7 +62,25 @@ jobs:
           echo "📦 Artifacts created:"
           ls -lh dist/
 
-      - name: Publish to PyPI
+      - name: Publish with OIDC (try first)
+        id: oidc_publish
+        continue-on-error: true
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           skip-existing: true
+
+      - name: Publish with token (fallback)
+        if: steps.oidc_publish.outcome == 'failure'
+        continue-on-error: true
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: true
+
+      - name: Show manual instructions
+        if: steps.oidc_publish.outcome == 'failure'
+        run: |
+          echo "⚠️  OIDC publish failed. If PYPI_API_TOKEN secret is set, the token step above ran as fallback."
+          echo "If it still failed, you can download the artifacts and publish manually via:"
+          echo "python -m pip install twine"
+          echo "python -m twine upload dist/*"
