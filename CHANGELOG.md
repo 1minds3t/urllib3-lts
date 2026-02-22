@@ -53,4 +53,4 @@ All patches have been meticulously adapted to maintain runtime compatibility wit
 - docs: add vulnerability analysis and patch documentation for CVE-2026-21441
 - fix: patch CVE-2026-21441 decompression-bomb bypass
 
-_41 files changed, 14623 insertions(+), 5 deletions(-)_
+_41 files changed, 14620 insertions(+), 5 deletions(-)_
