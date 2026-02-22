@@ -1,0 +1,69 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      python_version:
+        description: 'Target branch to build'
+        required: true
+        type: choice
+        options:
+          - 'lts-dispatcher'
+          - 'lts-py37'
+          - 'lts-py38'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    steps:
+      - name: Determine Python version and branch
+        id: python_info
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # If triggered manually, just use the dropdown choice directly!
+            BRANCH="${{ github.event.inputs.python_version }}"
+          else
+            # If triggered by a GitHub Release, parse the tag name
+            TAG_NAME="${{ github.event.release.tag_name }}"
+            if [[ "$TAG_NAME" =~ -py37$ ]]; then 
+              BRANCH="lts-py37"
+            elif [[ "$TAG_NAME" =~ -py38$ ]]; then 
+              BRANCH="lts-py38"
+            else 
+              # Default fallback is now the new dispatcher branch
+              BRANCH="lts-dispatcher"
+            fi
+          fi
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Checkout correct branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.python_info.outputs.branch }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install build tools
+        run: pip install --upgrade pip build setuptools wheel
+
+      - name: Build package
+        run: |
+          python -m build
+          echo "📦 Artifacts created:"
+          ls -lh dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
