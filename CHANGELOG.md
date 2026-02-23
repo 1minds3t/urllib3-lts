@@ -34,17 +34,20 @@ upstream src/urllib3/ tree, test/, and dummyserver/.
 ---
 
 **📝 Code Changes:**
-- NEW: src/urllib3_lts/setup.py (2 lines changed)
+- NEW: setup.py (2 lines changed)
+- NEW: src/urllib3_lts/setup.py
 
 **📚 Documentation:**
 - LICENSE.txt
 - README.md (38 lines)
 
 **⚙️ Configuration:**
-- .github/workflows/publish.yml (37 lines)
+- .github/workflows/publish.yml (45 lines)
 - pyproject.toml (20 lines)
 
 **Additional Changes:**
+- fix: fix ci
+- fix: Update 1 code files; Update configuration
 - ci(workflow): add py39 support and robust OIDC/token publish fallback
 - chore: bump toml
 - chore: strip dispatcher to meta-package only
@@ -57,4 +60,4 @@ upstream src/urllib3/ tree, test/, and dummyserver/.
 - Update pyproject.toml
 - Update publish.yml
 
-_267 files changed, 227 insertions(+), 80293 deletions(-)_
+_267 files changed, 232 insertions(+), 80297 deletions(-)_
