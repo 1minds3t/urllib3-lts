@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2026.21441.1] — 2026-02-22
+
+Fix pyproject.toml
+
+**⚙️ Configuration:**
+- pyproject.toml (7 lines)
+
+_1 file changed, 2 insertions(+), 5 deletions(-)_
+
 ## [2026.21441] — 2026-02-22
 
 Finalize 5-CVE Backport Chain for Python 3.7 and 3.8
