@@ -52,3 +52,59 @@ test_*.py
 
 # gitship diff exports (auto-added by gitship)
 gitship_exports/
+
+# Build artifacts
+develop-eggs/
+
+# Build artifacts
+downloads/
+
+# Build artifacts
+eggs/
+
+# Build artifacts
+.eggs/
+
+# Build artifacts
+lib/
+
+# Build artifacts
+lib64/
+
+# Build artifacts
+parts/
+
+# Build artifacts
+sdist/
+
+# Build artifacts
+var/
+
+# Build artifacts
+wheels/
+
+# Build artifacts
+.installed.cfg
+
+# Environment
+.env
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+
+# Logs
+yarn-debug.log*
+
+# Logs
+yarn-error.log*
+
+# npm
+.npm
+.coverage.*
+junit*.xml
+
+# Auto-generated license files
+licenses/

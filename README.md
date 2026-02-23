@@ -10,9 +10,9 @@ This release provides a hardened backport for Python 3.8, mitigating **5 Critica
 | --- | --- | --- | --- |
 | **CVE-2026-21441** | 🔴 HIGH | **Infinite Sleep DoS:** Limits `Retry-After` to 6 hours max. | 🛡️ **FIXED** |
 | **CVE-2025-66471** | 🔴 HIGH | **Header/Collection Logic:** Hardened internal data structures. | 🛡️ **FIXED** |
-| **CVE-2025-66418** | 🔴 HIGH | **Credential Leakage:** Strips sensitive headers on cross-origin redirects. | 🛡️ **FIXED** |
-| **CVE-2025-50182** | 🟡 MOD | **Resource Exhaustion:** Prevents DoS via unread compressed data. | 🛡️ **FIXED** |
-| **CVE-2025-50181** | 🟡 MOD | **Redirect/Decompress:** Fixed retry logic and resource cleanup. | 🛡️ **FIXED** |
+| **CVE-2025-66418** | 🔴 HIGH | **Decompression DoS:** Hard limit of 5 nested Content-Encoding layers, prevents CPU exhaustion via nested compression attacks. | 🛡️ **FIXED** |
+| **CVE-2025-50182** | 🟡 MOD | **Node.js Redirect Bypass:** Enforces manual redirect control in emscripten backend. | 🛡️ **FIXED** |
+| **CVE-2025-50181** | 🟡 MOD | **Redirect Security Bypass:** Fixed PoolManager to correctly disable redirects when `retries=False`. | 🛡️ **FIXED** |
 
 ## 🛠️ Patch Architecture
 
@@ -20,7 +20,6 @@ Unlike standard upstream releases, this LTS version is specifically tuned for **
 
 * **Targeted Fixes:** Only security-critical logic was backported; "modernization" noise (Python 3.14+ compatibility) was stripped to maintain a minimal diff.
 * **Resource Safety:** Implemented mandatory `retry_after_max` and lazy decompression guards to prevent resource hanging.
-* **Localization:** All internal strings and error messages were handled via an **AI automated translation chain** for consistency across the codebase.
 
 ## 📦 Installation
 
@@ -29,17 +28,28 @@ pip install urllib3-lts-py38==2026.21441
 
 ```
 
-## 🌐 The OmniPKG Ecosystem
 
-Maintained by **1minds3t**.
+```markdown
+## 🌐 OmniPKG Security Scanning
 
-**Manage your environment:**
+This package is maintained as part of the **OmniPKG** ecosystem — a Python
+environment manager with built-in CVE scanning powered by
+[Safety](https://pypi.org/project/safety/) or pip audit as a fallback.
+
+When you run `omnipkg reset`, it automatically audits all installed packages
+against the Safety vulnerability database and flags any known CVEs:
 
 ```bash
 pip install omnipkg
 omnipkg reset -y
-
+# -> Performs security scan across all installed packages
+# -> Reports CVEs, audit status, and affected versions
+# -> urllib3-lts-py38 will show 0 issues for the patched CVEs above
 ```
+
+Maintained by **[1minds3t](https://github.com/1minds3t)**.
+```
+
 
 ## ⚠️ Critical Installation Warning
 

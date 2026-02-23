@@ -1,0 +1,12 @@
+# MANIFEST.in - Source distribution includes
+
+# Core documentation and license files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CHANGES.rst
+include PKG-INFO
+
+# Exclude development/build artifacts
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
