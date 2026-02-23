@@ -41,9 +41,11 @@ upstream src/urllib3/ tree, test/, and dummyserver/.
 - README.md (38 lines)
 
 **⚙️ Configuration:**
+- .github/workflows/publish.yml (37 lines)
 - pyproject.toml (20 lines)
 
 **Additional Changes:**
+- ci(workflow): add py39 support and robust OIDC/token publish fallback
 - chore: bump toml
 - chore: strip dispatcher to meta-package only
 
@@ -55,5 +57,4 @@ upstream src/urllib3/ tree, test/, and dummyserver/.
 - Update pyproject.toml
 - Update publish.yml
 
-_265 files changed, 134 insertions(+), 80290 deletions(-)_
-
+_267 files changed, 227 insertions(+), 80293 deletions(-)_
