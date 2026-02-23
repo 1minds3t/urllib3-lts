@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "urllib3-lts-py38"
-version = "2026.21441"
+version = "2026.21441.1"
 description = "Python 3.8 LTS backport of urllib3 v2.2.3 with 5 CVE security patches (CVE-2026-21441, CVE-2025-66471, CVE-2025-66418, CVE-2025-50182, CVE-2025-50181)"
 requires-python = ">=3.8, <3.9"
 license = {text = "MIT"}
