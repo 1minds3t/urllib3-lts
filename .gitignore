@@ -59,3 +59,9 @@ build/
 dist/
 *.egg-info/
 __pycache__/
+
+# gitship internal state (auto-added by gitship)
+.gitship/
+
+# gitship diff exports (auto-added by gitship)
+gitship_exports/
