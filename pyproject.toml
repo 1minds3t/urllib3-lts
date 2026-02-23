@@ -16,11 +16,8 @@ classifiers = [
 ]
 
 dependencies = [
-    # PY3.7: Depends on latest EXISTING version, allows update to 2026+
-    "urllib3-lts-py37>=2025.66471.3 ; python_version >= '3.7' and python_version < '3.8'",
-    
-    # PY3.8: Depends on latest EXISTING version, allows update to 2026+
-    "urllib3-lts-py38>=2025.66471.2 ; python_version >= '3.8' and python_version < '3.9'",
+    "urllib3-lts-py37>=2026.21441.1 ; python_version >= '3.7' and python_version < '3.8'",
+    "urllib3-lts-py38>=2026.21441 ; python_version >= '3.8' and python_version < '3.9'",
     
     # PY3.9+: Upstream fix
     "urllib3>=2.6.3 ; python_version >= '3.9'" 
